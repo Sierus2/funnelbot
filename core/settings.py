@@ -6,10 +6,13 @@ from environs import Env
 class Bots:
     bot_token: str
     admin_id: str
+    post_channel: str
+    you_kassa_token: str
 
 
 @dataclass
 class Db:
+    redis: str
     user: str
     host: str
     password: str
@@ -29,8 +32,11 @@ def get_settings(path: str):
         bots=Bots(
             bot_token=env.str('BOT_TOKEN'),
             admin_id=env.str('ADMIN_ID'),
+            post_channel=env.str('POSTING_CHANNEL'),
+            you_kassa_token=env.str('YOUKASSA_TOKEN'),
         ),
         db=Db(
+            redis=env.str('DB_REDIS_DNS'),
             user=env.str('DB_USER'),
             host=env.str('DB_HOST'),
             password=env.str('DB_PASSWORD'),
@@ -40,4 +46,3 @@ def get_settings(path: str):
 
 
 settings = get_settings('.env')
-
